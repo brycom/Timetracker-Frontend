@@ -24,7 +24,7 @@ function App() {
         pageUrl = getUrl;
         setPage(getUrl);
       } else {
-        pageUrl = 'home';
+        pageUrl = 'homePage';
       }
     }
 
