@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../Header/Navbar'
 import Tasks from './Tasks'
 import '../Css/Statistics.css'
+import Chart from './Chart'
 
 function Statistics() {
   return (
@@ -21,6 +22,7 @@ function Statistics() {
         </div>
         <div className='bottom-section'>
           <h1>Chart!!!</h1>
+          <Chart />
       </div>
     
     </>
