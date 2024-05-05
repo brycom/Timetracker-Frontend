@@ -1,5 +1,4 @@
-import React from 'react'
-import Navbar from '../Header/Navbar'
+
 import Tasks from './Tasks'
 import '../Css/Statistics.css'
 import Chart from './Chart'
