@@ -44,6 +44,7 @@ body{
   
   #custom-task {
     max-width: 350px;
+    min-width: 300px;
     margin-left: 7%; /* Mindre margin för att placera i mitten */
     margin-right: 7%;
     padding: 20px;
@@ -78,22 +79,30 @@ body{
   }
   
   .react-calendar {
-    max-width: 550px;
-    height: 500px;
-    margin-right: 50px !important;
+    min-width: 500px;
+    max-width: 700px;
+    padding: 10px;
+    margin-right: 9% !important;
     margin-left: auto;
+    background-color:rgba(202, 199, 199, 0.363) ;
+    border-radius: 10px;
+    box-shadow:rgba(202, 199, 199, 0.692) 5px 5px 5px;
   }
   
   .react-calendar__navigation {
-    display: flex;
-    justify-content:space-evenly;
+   
   }
-  .react-calendar__month-view{
 
-    height: 500px;
-    flex: 1;
-    
+  .react-calendar__month-view__days{
+    height: 400px;
+    width: 100%;
     
   }
-  
+  .react-calendar__tile{
+    /* background-color: rgba(0, 0, 0, 0.397); */
+    border-radius: 10px;
+
+    
+
+  }  
   
