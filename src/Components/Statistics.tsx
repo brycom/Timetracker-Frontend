@@ -3,7 +3,11 @@ import Tasks from './Tasks'
 import '../Css/Statistics.css'
 import Chart from './Chart'
 
-function Statistics() {
+interface Props{
+  setUpdateTasks:Function
+  updateTasks:boolean
+}
+function Statistics(props:Props) {
   return (
     <>
     <div className='top-section'>
@@ -17,7 +21,7 @@ function Statistics() {
             <li>Träning 5t (300min)</li>
           </ul>
         </div>
-          <Tasks/>
+          <Tasks setUpdateTasks={props.setUpdateTasks} updateTasks={props.updateTasks}/>
         </div>
         <div className='bottom-section'>
           <h1>Chart!!!</h1>
