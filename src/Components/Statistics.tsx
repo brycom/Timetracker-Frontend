@@ -5,7 +5,7 @@ import Chart from './Chart'
 import { useEffect, useState } from 'react'
 
 
-interface task{
+/* interface task{
   category: string 
 date: string 
 description: string
@@ -15,24 +15,19 @@ id:string
 startTime: string
 timeSpent:number
 
-}
+} */
 interface tpc{
   category: string,
   timeSpent: number
 }
-interface statistics {
-  totaltime: number,
-  timePerCategory: tpc[],
-  tasks: task[],
-  user: string
-}
+
 
 interface Props{
   setUpdateTasks:Function
   updateTasks:boolean
 }
 function Statistics(props:Props) {
-  const [tasks, setTasks] = useState<task[]>()
+  //const [tasks, setTasks] = useState<task[]>()
   const[totalTime, setTotalTime] = useState<number>()
   const[user, setUser] = useState<string>()
 
@@ -42,7 +37,7 @@ useEffect(() => {
   fetch("https://oyster-app-oquaf.ondigitalocean.app/statistics/6638a6e076d5ea6b30c71bdd/2024-05-01/2024-05-06")
   .then((res) => res.json())
   .then((data) => {
-     setTasks(data.tasks)
+     //setTasks(data.tasks)
      setTotalTime(data.totaltime)
      setUser(data.user)
      setTimePerCategory(data.timePerCategory)
