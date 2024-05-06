@@ -24,12 +24,12 @@ function Planing() {
   const[newTask, setNewTask] = useState<task>(
     {
       category: '',
-      date: '',
+      date: new Date().toLocaleDateString('sv-se'),
       description: '',
       endTime: new Date().toLocaleTimeString('sv-se'),
       headline: '',
       id: '',
-      startTime: '',
+      startTime: new Date().toLocaleTimeString('sv-se'),
       timeSpent: 0
     }
   );
@@ -43,12 +43,14 @@ function Planing() {
     .then((res)=>res.json())
     .then((data)=>{
       setTasks(data)
-      console.log()
+      console.log(data)
 
     })
   }
 
-  function addTask(){
+  function addDefaultTask(){
+    console.log(newTask.date)
+    console.log(newTask.startTime)
     
     fetch("https://oyster-app-oquaf.ondigitalocean.app/task", {
       method: 'POST',
@@ -81,6 +83,28 @@ function Planing() {
    })
   }
 
+  function addTaskToUser(){
+    fetch("https://oyster-app-oquaf.ondigitalocean.app/task", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        category: newTask.category,
+        headline: newTask.headline,
+        description: newTask.description,
+        date: newTask.date,
+        endTime: newTask.endTime,
+        startTime: startTime,
+        timeSpent: 0
+      })
+    })
+   .then((res) =>{ res.json()})
+  }
+
+
+
+
 
 
   return (
@@ -103,22 +127,22 @@ function Planing() {
           <button id='stop-btn'>Avsluta</button>
           </div>
       </div>
-        <form onSubmit={(e)=>{addTask(), e.preventDefault()}} id='custom-task'>
+        <form onSubmit={(e)=>{addDefaultTask(), e.preventDefault()}} id='custom-task'>
           <h2>Skapa ny upgift:</h2>
           <input name="category" type="text" placeholder='Kategori:' value={newTask?.category} onChange={(e)=>setNewTask({...newTask, category: e.target.value})} />
           <input name='headline' type="text" placeholder='Rubrik:' value={newTask?.headline} onChange={(e)=>setNewTask({...newTask, headline: e.target.value})} />
           <input name='description' type="text" placeholder='Beskrivning:' value={newTask?.description} onChange={(e)=>setNewTask({...newTask, description: e.target.value})} />
-          <input name='date' type="date" value={date} onChange={(e)=>setNewTask({...newTask, date: e.target.value})}/>
-          <input name='time' type="time" value={startTime} onChange={(e)=>setNewTask({...newTask, startTime: e.target.value})} />
+          <input name='date' type="date" value={newTask?.date} onChange={(e)=>setNewTask({...newTask, date: e.target.value})}/>
+          <input name='time' type="time" step="any" value={newTask?.startTime} onChange={(e)=>setNewTask({...newTask, startTime: e.target.value})} />
           <div id='new-task-btn-div'>
           <button type='submit' id='add-btn'>Lägg till</button>
-          <button id='custom-btn'>Starta</button>
+          <button onClick={addTaskToUser} id='custom-btn'>Starta</button>
           </div>
         </form>
       < Calander/>
       </div>
       <div id='bottom-section'>
-      <Tasks/>
+      <Tasks newTask={newTask}/>
       </div>
       </>
   

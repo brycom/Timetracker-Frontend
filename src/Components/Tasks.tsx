@@ -1,70 +1,49 @@
 
+import { useEffect, useState } from 'react'
 import '../Css/Tasks.css'
 
-function Tasks() {
+interface Props{
+    newTask: task
+}
+
+interface task{
+    category: string 
+    date: string 
+    description: string
+    endTime: string
+    headline: string
+    id:string 
+    startTime: string
+    timeSpent:number
+}
+
+ function Tasks(props: Props) {
+
+    const [tasks, setTasks] = useState<task[]>([]);
+
+    useEffect(() => {
+        fetch("https://oyster-app-oquaf.ondigitalocean.app/task/6638a6e076d5ea6b30c71bdd")
+        .then((res)=>res.json())
+        .then((data)=>
+            setTasks(data)
+    )
+    }, [props.newTask]); 
+
   return (
     <div>
-      <ul className='task-ul'>
-        <li className='task-li'>
+      <ul className='task-ul'>{tasks.map((task) =>(
+    
+        <li className='task-li' key={task.id}>
             <div id='headline'>
-            <h3>Kategori</h3>
-            <h3>Rubrik</h3>
+            <h3>{task.category}</h3>
+            <h3>{task.headline}</h3>
             </div>
-            <p id='description'>Försöker göra en ok design till min app i
-                figma men jag vet inte riktigt hur det går.
-                men det blir nog iallafall bättre en om jag
-                inte hade gjort det!</p>
-                <div id='time'>
-                <h5>Start-tid: 19:00</h5>
-                <h5>Slut-tid: 21:00</h5>
-            </div>
-
-        </li>
-        <li className='task-li'>
-            <div id='headline'>
-            <h3>Kategori</h3>
-            <h3>Rubrik</h3>
-            </div>
-            <p id='description'>Försöker göra en ok design till min app i
-                figma men jag vet inte riktigt hur det går.
-                men det blir nog iallafall bättre en om jag
-                inte hade gjort det!</p>
-                <div id='time'>
-                <h5>Start-tid: 19:00</h5>
-                <h5>Slut-tid: 21:00</h5>
-            </div>
-
-        </li>
-        <li className='task-li'>
-            <div id='headline'>
-            <h3>Kategori</h3>
-            <h3>Rubrik</h3>
-            </div>
-            <p id='description'>Försöker göra en ok design till min app i
-                figma men jag vet inte riktigt hur det går.
-                men det blir nog iallafall bättre en om jag
-                inte hade gjort det!</p>
+            <p id='description'>{task.description}</p>
             <div id='time'>
-                <h5>Start-tid: 19:00</h5>
-                <h5>Slut-tid: 21:00</h5>
+            <h5>Start-tid: {task.startTime}</h5>
+            <h5>Slut-tid: {task.endTime}</h5>
             </div>
-
-        </li>
-        <li className='task-li'>
-            <div id='headline'>
-            <h3>Kategori</h3>
-            <h3>Rubrik</h3>
-            </div>
-            <p id='description'>Försöker göra en ok design till min app i
-                figma men jag vet inte riktigt hur det går.
-                men det blir nog iallafall bättre en om jag
-                inte hade gjort det!</p>
-                <div id='time'>
-                <h5>Start-tid: 19:00</h5>
-                <h5>Slut-tid: 21:00</h5>
-            </div>
-
-        </li>
+      </li>))}
       </ul>
     </div>
   )
