@@ -82,6 +82,9 @@ body{
   }
   
   #custom-task input {
+    color: rgba(0, 0, 0, 0.61);
+    font-size: medium;
+    font-weight: 600;
     margin-bottom: 20px;
     height: 35px;
     border-radius: 5px;

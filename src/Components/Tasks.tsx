@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react'
 import '../Css/Tasks.css'
 
 interface Props{
-    newTask: task
+    setUpdateTasks:Function
+    updateTasks:boolean
 }
 
 interface task{
@@ -25,9 +26,10 @@ interface task{
         fetch("https://oyster-app-oquaf.ondigitalocean.app/task/6638a6e076d5ea6b30c71bdd")
         .then((res)=>res.json())
         .then((data)=>
-            setTasks(data)
+            setTasks(data),
+        props.setUpdateTasks(false)
     )
-    }, [props.newTask]); 
+    }, [props.updateTasks]); 
 
   return (
     <div>

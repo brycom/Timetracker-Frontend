@@ -1,14 +1,20 @@
 
 import Calendar from 'react-calendar';
 
-function Calander() {
+interface Props{
+  date:string,
+  setDate:Function
+}
+
+function Calander(props:Props) {
+
   return (
     <div>
             <Calendar
 
 minDate={new Date()}
-/* tileDisabled={({ date, view }) => view === 'month' && blockDay(date.getDay(), date)} */
-/* onClickDay={handleDateChange} */
+
+onClickDay={(clickedDay)=>{props.setDate(clickedDay.toLocaleDateString('sv-se'))}}
 value={new Date()}
 />
     </div>
