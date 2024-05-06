@@ -115,10 +115,10 @@ body{
     box-shadow:rgba(202, 199, 199, 0.692) 5px 5px 5px;
   }
   
-  .react-calendar__navigation {
+/*   .react-calendar__navigation {
    
   }
-
+ */
   .react-calendar__month-view__days{
     height: 400px;
     width: 100%;

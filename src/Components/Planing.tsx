@@ -2,8 +2,7 @@
 import Calander from './Calander'
 import Tasks from './Tasks'
 import '../Css/Planing.css'
-import { useEffect, useState } from 'react';
-
+import { useEffect } from 'react';
 interface task{
   category: string 
 date: string 
@@ -16,39 +15,43 @@ timeSpent:number
 
 }
 
-function Planing() {
-  const [tasks, setTasks] = useState<task[]>([]);
-  const[selectedTask, setselectedTask] = useState<task>();
-  const[startTime, setStartTime] = useState<string>(new Date().toLocaleTimeString('sv-se'));
-  const[date, setDate] = useState<string>(new Date().toLocaleDateString('sv-se'));
-  const[updateTasks, setUpdateTasks] = useState<boolean>(false)
-  const[newTask, setNewTask] = useState<task>(
-    {
-      category: '',
-      date: date,
-      description: '',
-      endTime: new Date().toLocaleTimeString('sv-se'),
-      headline: '',
-      id: '',
-      startTime: new Date().toLocaleTimeString('sv-se'),
-      timeSpent: 0
-    }
-  );
+interface Props{
+  tasks:task[]
+  setTasks:Function
+  selectedTask:task
+  setselectedTask:Function
+  startTime: string
+  setStartTime:Function
+  date: string
+  setDate:Function
+  updateTasks:boolean
+  setUpdateTasks:Function
+  newTask:task
+  setNewTask:Function
+
+
+
+}
+
+function Planing(props:Props) {
+
+
+
 
   useEffect(() => {
     getDefaultTasks();
   }, []);
 
   useEffect(() => {
-    setNewTask({...newTask, date: date})
-  }, [date]);
+    props.setNewTask({...props.newTask, date: props.date})
+  }, [props.date]);
 
 
   function getDefaultTasks(){
     fetch("https://oyster-app-oquaf.ondigitalocean.app/defaulttasks")
     .then((res)=>res.json())
     .then((data)=>{
-      setTasks(data)
+      props.setTasks(data)
 
     })
   }
@@ -56,11 +59,11 @@ function Planing() {
   function addDefaultTask(){
 
     if (
-      newTask.category === '' ||
-      newTask.date === '' ||
-      newTask.headline === '' ||
-      newTask.description === '' ||
-      newTask.startTime === ''
+      props.newTask.category === '' ||
+      props.newTask.date === '' ||
+      props.newTask.headline === '' ||
+      props.newTask.description === '' ||
+      props.newTask.startTime === ''
     ) {
       alert('Du måste fylla i alla fält');
       return;
@@ -74,20 +77,20 @@ function Planing() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        category: newTask.category,
-        headline: newTask.headline,
-        description: newTask.description,
-        date: newTask.date,
-        endTime: newTask.endTime,
-        startTime: startTime,
+        category: props.newTask.category,
+        headline: props.newTask.headline,
+        description: props.newTask.description,
+        date: props.newTask.date,
+        endTime: props.newTask.endTime,
+        startTime: props.startTime,
         timeSpent: 0
       })
     })
    .then((res) =>{ res.json()
     getDefaultTasks();
-    setNewTask({
+    props.setNewTask({
       category: '',
-      date: date,
+      date: props.date,
       description: '',
       endTime: new Date().toLocaleTimeString('sv-se'),
       headline: '',
@@ -100,11 +103,11 @@ function Planing() {
 
   function addTaskToUser(){
     if (
-      newTask.category === '' ||
-      newTask.date === '' ||
-      newTask.headline === '' ||
-      newTask.description === '' ||
-      newTask.startTime === ''
+      props.newTask.category === '' ||
+      props.newTask.date === '' ||
+      props.newTask.headline === '' ||
+      props.newTask.description === '' ||
+      props.newTask.startTime === ''
     ) {
       alert('Du måste fylla i alla fält');
       return;
@@ -115,20 +118,20 @@ function Planing() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        category: newTask.category,
-        headline: newTask.headline,
-        description: newTask.description,
-        date: newTask.date,
-        endTime: newTask.endTime,
-        startTime: newTask.startTime,
+        category: props.newTask.category,
+        headline: props.newTask.headline,
+        description: props.newTask.description,
+        date: props.newTask.date,
+        endTime: props.newTask.endTime,
+        startTime: props.newTask.startTime,
         timeSpent: 0
       })
     })
    .then((res) =>{ res.json()
-    ,setUpdateTasks(true)
-  ,    setNewTask({
+    ,props.setUpdateTasks(true)
+  ,    props.setNewTask({
     category: '',
-    date: date,
+    date: props.date,
     description: '',
     endTime: new Date().toLocaleTimeString('sv-se'),
     headline: '',
@@ -151,15 +154,15 @@ function Planing() {
       <div id='default-div'>
         <h2>Att göra:</h2>
         <ul id='default-tasks'>
-          {tasks.map((task)=>(
-            <li key={task.id} onClick={()=>setselectedTask(task)}>
+          {props.tasks.map((task)=>(
+            <li key={task.id} onClick={()=>props.setselectedTask(task)}>
               <h4>{task.headline}</h4>
               <p>Categori: {task.category}</p>
 
             </li>
           ))}
         </ul>
-        <input type="text" placeholder='Vald upgift:' value={selectedTask?.headline} />
+        <input type="text" placeholder='Vald upgift:' value={props.selectedTask?.headline} />
         <div id='default-tasks-btn-div'>
           <button id='start-btn'>Starta</button>
           <button id='stop-btn'>Avsluta</button>
@@ -167,20 +170,20 @@ function Planing() {
       </div>
         <form onSubmit={(e)=>{addDefaultTask(), e.preventDefault()}} id='custom-task'>
           <h2>Skapa ny upgift:</h2>
-          <input required name="category" type="text" placeholder='Kategori:' value={newTask?.category} onChange={(e)=>setNewTask({...newTask, category: e.target.value})} />
-          <input required name='headline' type="text" placeholder='Rubrik:' value={newTask?.headline} onChange={(e)=>setNewTask({...newTask, headline: e.target.value})} />
-          <input required name='description' type="text" placeholder='Beskrivning:' value={newTask?.description} onChange={(e)=>setNewTask({...newTask, description: e.target.value})} />
-          <input required name='date' type="date" value={newTask?.date} onChange={(e)=>setNewTask({...newTask, date: e.target.value})}/>
-          <input required name='time' type="time" step="any" value={newTask?.startTime} onChange={(e)=>setNewTask({...newTask, startTime: e.target.value})} />
+          <input required name="category" type="text" placeholder='Kategori:' value={props.newTask?.category} onChange={(e)=>props.setNewTask({...props.newTask, category: e.target.value})} />
+          <input required name='headline' type="text" placeholder='Rubrik:' value={props.newTask?.headline} onChange={(e)=>props.setNewTask({...props.newTask, headline: e.target.value})} />
+          <input required name='description' type="text" placeholder='Beskrivning:' value={props.newTask?.description} onChange={(e)=>props.setNewTask({...props.newTask, description: e.target.value})} />
+          <input required name='date' type="date" value={props.newTask?.date} onChange={(e)=>props.setNewTask({...props.newTask, date: e.target.value})}/>
+          <input required name='time' type="time" step="any" value={props.newTask?.startTime} onChange={(e)=>props.setNewTask({...props.newTask, startTime: e.target.value})} />
           <div id='new-task-btn-div'>
           <button type='submit' id='add-btn'>Lägg till</button>
           <button type='button' onClick={addTaskToUser} id='custom-btn'>Starta</button>
           </div>
         </form>
-      < Calander date={date} setDate={setDate}/>
+      < Calander date={props.date} setDate={props.setDate}/>
       </div>
       <div id='bottom-section'>
-      <Tasks updateTasks={updateTasks} setUpdateTasks={setUpdateTasks}/>
+      <Tasks updateTasks={props.updateTasks} setUpdateTasks={props.setUpdateTasks}/>
       </div>
       </>
   
