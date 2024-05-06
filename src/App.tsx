@@ -107,7 +107,7 @@ function App() {
           about: <About />,
           planing: <Planing {...props} />,
           statistics: (
-            <Statistics setUpdateTasks={setUpdateTasks} updateTasks={updateTasks} />
+            <Statistics setUpdateTasks={setUpdateTasks} updateTasks={updateTasks}  />
           ),
           admin: <Admin />,
           login: <Login />,
