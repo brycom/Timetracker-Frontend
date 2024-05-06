@@ -35,7 +35,7 @@ interface Props {
 }
 
 function App() {
-  const [page, setPage] = useState<string>('');
+  const [page, setPage] = useState<string>('homePage');
   const [tasks, setTasks] = useState<task[]>([]);
   const [startTime, setStartTime] = useState<string>(
     new Date().toLocaleTimeString('sv-se')
@@ -107,7 +107,7 @@ function App() {
           about: <About />,
           planing: <Planing {...props} />,
           statistics: (
-            <Statistics setUpdateTasks={setUpdateTasks} updateTasks={updateTasks} />
+            <Statistics setUpdateTasks={setUpdateTasks} updateTasks={updateTasks}  />
           ),
           admin: <Admin />,
           login: <Login />,
