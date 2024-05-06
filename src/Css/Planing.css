@@ -22,6 +22,9 @@ body{
     border-radius: 10px;
   }
   #default-div ul{
+    max-height: 400px; /* Maximal höjd för ul */
+    overflow-y: auto;
+    
     margin: 0;
     padding: 0;
     margin-bottom: 15px;
@@ -29,6 +32,12 @@ body{
   }
   #default-div li{
     list-style: none;
+  }
+  #default-div h4{
+    margin-bottom: -10px;
+  }
+  #default-div p{
+    margin-bottom: -10px;
   }
   #default-div button{
     margin: 20px;
@@ -41,11 +50,23 @@ body{
     border: none;
     border-radius: 5px;
   }
+  ::-webkit-scrollbar {
+    width: 10px; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(202, 199, 199);
+    border-radius: 6px; 
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #f0f0f0; 
+  }
   
   #custom-task {
     max-width: 350px;
     min-width: 300px;
-    margin-left: 7%; /* Mindre margin för att placera i mitten */
+    margin-left: 7%;
     margin-right: 7%;
     padding: 20px;
     flex-grow: 1;
@@ -69,9 +90,11 @@ body{
     box-shadow:rgba(202, 199, 199, 0.712) 1px 3px 3px;
   }
   
-  #custom-task button {
-    margin-top: 20px;
 
+  
+  #new-task-btn-div, #default-tasks-btn-div {
+    justify-content: space-evenly;
+    display: flex;
   }
   
   #bottom-section {
