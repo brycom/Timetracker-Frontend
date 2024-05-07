@@ -29,30 +29,45 @@ interface Props{
   setSelectedTask:Function
 }
 function Statistics(props:Props) {
+  const jwtToken = localStorage.getItem('token');
+  const userl = localStorage.getItem('user');
+  const currentDate = new Date();
+currentDate.setDate(currentDate.getDate() - 7)
   //const [tasks, setTasks] = useState<task[]>()
   const[totalTime, setTotalTime] = useState<number>(0);
   const[user, setUser] = useState<string>();
-  const [startDate, /* setStartDate */] = useState<string>('');
-  const [endDate, /* setEndDate */] = useState<string>('');
+  const [startDate, setStartDate] = useState<string>(currentDate.toLocaleDateString('sv-se'));
+  const [endDate, setEndDate] = useState<string>(new Date().toLocaleDateString('sv-se'));
   const[timePerCategory, setTimePerCategory] = useState<tpc[]>([]);
 
 useEffect(() => {
-  fetch("https://oyster-app-oquaf.ondigitalocean.app/statistics/6638a6e076d5ea6b30c71bdd/2024-05-01/2024-05-06")
+  fetch("https://oyster-app-oquaf.ondigitalocean.app/user/statistics/"+userl+"/"+startDate+"/"+endDate,{
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  })
   .then((res) => res.json())
   .then((data) => {
-     //setTasks(data.tasks)
+    console.log(data)
      setTotalTime(data.totaltime)
      setUser(data.user)
      setTimePerCategory(data.timePerCategory)
 
    })
-}, []);
+}, [startDate, endDate]);
   return (
     <>
     <div className='top-section'>
     
         <div className='ul-container'>
-        <input type="text" placeholder='Vecka:' />
+        <div id='input-div'>
+        <label htmlFor="startDate">Startdatum:</label>
+        <input value={startDate} onChange={(e)=>setStartDate(e.target.value)}type="date" id="startDate" />
+        <label htmlFor="endDate">Slutdatum:</label>
+        <input value={endDate} onChange={(e)=> setEndDate(e.target.value)} type="date" id="endDate" />
+        </div>
+        
+
           <h3>{user}</h3>
           <h3>Total tid: {(totalTime/60).toFixed(1)}t ({totalTime} min)</h3>
           <ul className='time-per-category'>
