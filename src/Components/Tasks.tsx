@@ -21,15 +21,21 @@ interface Props{
 }
 
  function Tasks(props: Props) {
+  const jwtToken = localStorage.getItem('token');
+  const user = localStorage.getItem('user')
 
     const [tasks, setTasks] = useState<task[]>([]);
 
     useEffect(() => {
-        fetch("https://oyster-app-oquaf.ondigitalocean.app/task/6638a6e076d5ea6b30c71bdd")
+        fetch("https://oyster-app-oquaf.ondigitalocean.app/user/task/"+ user, {
+          headers:{
+          'Authorization': `Bearer ${jwtToken}`
+        }})
         .then((res)=>res.json())
-        .then((data)=>
-            setTasks(data),
-        props.setUpdateTasks(false)
+        .then((data)=>{
+            setTasks(data);
+        props.setUpdateTasks(false);
+        console.log(data);}
     )
     }, [props.updateTasks]); 
 

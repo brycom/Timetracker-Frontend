@@ -24,13 +24,18 @@ interface Props{
 }
 
 function HandelTask(props:Props) {
+    const jwtToken = localStorage.getItem('token');
+    const user = localStorage.getItem('user')
 
 
     function startTask(){
         if(props.selectedTask.category !== undefined){
         const time = new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'});
-        fetch("https://oyster-app-oquaf.ondigitalocean.app/starttask/6638a6e076d5ea6b30c71bdd/"+props.selectedTask.id+"/"+time,{
-          method:'PATCH'
+        fetch("https://oyster-app-oquaf.ondigitalocean.app/user/starttask/"+user+"/"+props.selectedTask.id+"/"+time,{
+          method:'PATCH',
+          headers:{
+            'Authorization': `Bearer ${jwtToken}`
+          }
         })
         .then(res=>res.json())
         .then((data)=>{
@@ -42,8 +47,11 @@ function HandelTask(props:Props) {
       function EndTask(){
         if(props.selectedTask.category !== undefined){
         const time = new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'});
-        fetch("https://oyster-app-oquaf.ondigitalocean.app/stoptask/6638a6e076d5ea6b30c71bdd/"+props.selectedTask.id+"/"+time,{
-          method:'PATCH'
+        fetch("https://oyster-app-oquaf.ondigitalocean.app/user/stoptask/"+user+"/"+props.selectedTask.id+"/"+time,{
+          method:'PATCH',
+          headers:{
+            'Authorization': `Bearer ${jwtToken}`
+          }
         })
         .then(res=>res.json())
         .then((data)=>{

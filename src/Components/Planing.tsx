@@ -35,6 +35,8 @@ interface Props{
 }
 
 function Planing(props:Props) {
+  const jwtToken = localStorage.getItem('token');
+  const user = localStorage.getItem('user')
 
 
 
@@ -42,6 +44,18 @@ function Planing(props:Props) {
   useEffect(() => {
     getDefaultTasks();
   }, []);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+        props.setNewTask((prevTask:task) => ({
+            ...prevTask,
+            startTime: new Date().toLocaleTimeString('sv-se', { hour: '2-digit', minute: '2-digit' })
+        }));
+    }, 60000);
+
+    // Stoppa intervallet när komponenten avmonteras eller när komponenten uppdateras
+    return () => clearInterval(intervalId);
+}, []);
+
 
   useEffect(() => {
     props.setNewTask({...props.newTask, date: props.date})
@@ -49,7 +63,11 @@ function Planing(props:Props) {
 
 
   function getDefaultTasks(){
-    fetch("https://oyster-app-oquaf.ondigitalocean.app/defaulttasks")
+    fetch("https://oyster-app-oquaf.ondigitalocean.app/user/defaulttasks",
+      {headers:{
+        'Authorization': `Bearer ${jwtToken}`
+      }}
+    )
     .then((res)=>res.json())
     .then((data)=>{
       props.setTasks(data)
@@ -72,9 +90,10 @@ function Planing(props:Props) {
 
   
     
-    fetch("https://oyster-app-oquaf.ondigitalocean.app/task", {
+    fetch("https://oyster-app-oquaf.ondigitalocean.app/user/task", {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${jwtToken}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -103,6 +122,7 @@ function Planing(props:Props) {
   }
 
   function addTaskToUser(){
+
     if (
       props.newTask.category === '' ||
       props.newTask.date === '' ||
@@ -113,9 +133,10 @@ function Planing(props:Props) {
       alert('Du måste fylla i alla fält');
       return;
     }
-    fetch("https://oyster-app-oquaf.ondigitalocean.app/task/6638a6e076d5ea6b30c71bdd", {
+    fetch("https://oyster-app-oquaf.ondigitalocean.app/user/task/"+user, {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${jwtToken}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -158,7 +179,10 @@ function Planing(props:Props) {
         <ul id='default-tasks'>
           {props.tasks.map((task)=>(
             <li key={task.id} onClick={()=>{
-              props.setNewTask(task)}}>
+              props.setNewTask({...props.newTask,
+               category:task.category,
+               headline:task.headline,
+               description: task.description})}}>
               <h4>{task.headline}</h4>
               <p>Categori: {task.category}</p>
 
