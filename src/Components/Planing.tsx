@@ -3,6 +3,7 @@ import Calander from './Calander'
 import Tasks from './Tasks'
 import '../Css/Planing.css'
 import { useEffect } from 'react';
+import HandelTask from './HandelTask';
 interface task{
   category: string 
 date: string 
@@ -92,7 +93,7 @@ function Planing(props:Props) {
       category: '',
       date: props.date,
       description: '',
-      endTime: new Date().toLocaleTimeString('sv-se'),
+      endTime: new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'}),
       headline: '',
       id: '',
       startTime: '',
@@ -133,13 +134,14 @@ function Planing(props:Props) {
     category: '',
     date: props.date,
     description: '',
-    endTime: new Date().toLocaleTimeString('sv-se'),
+    endTime: new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'}),
     headline: '',
     id: '',
-    startTime: new Date().toLocaleTimeString('sv-se'),
+    startTime: new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'}),
     timeSpent: 0
   })})
   }
+
 
 
 
@@ -155,18 +157,16 @@ function Planing(props:Props) {
         <h2>Att göra:</h2>
         <ul id='default-tasks'>
           {props.tasks.map((task)=>(
-            <li key={task.id} onClick={()=>props.setselectedTask(task)}>
+            <li key={task.id} onClick={()=>{
+              props.setNewTask(task)}}>
               <h4>{task.headline}</h4>
               <p>Categori: {task.category}</p>
 
             </li>
           ))}
         </ul>
-        <input type="text" placeholder='Vald upgift:' value={props.selectedTask?.headline} />
-        <div id='default-tasks-btn-div'>
-          <button id='start-btn'>Starta</button>
-          <button id='stop-btn'>Avsluta</button>
-          </div>
+        <div>vald upgift: {props.newTask?.headline}</div>
+        
       </div>
         <form onSubmit={(e)=>{addDefaultTask(), e.preventDefault()}} id='custom-task'>
           <h2>Skapa ny upgift:</h2>
@@ -183,7 +183,8 @@ function Planing(props:Props) {
       < Calander date={props.date} setDate={props.setDate}/>
       </div>
       <div id='bottom-section'>
-      <Tasks updateTasks={props.updateTasks} setUpdateTasks={props.setUpdateTasks}/>
+        {props.selectedTask.category &&<HandelTask tasks={props.tasks} setTasks={props.setTasks} selectedTask={props.selectedTask} setselectedTask={props.setselectedTask} setUpdateTasks={props.setUpdateTasks}/>}
+      <Tasks  updateTasks={props.updateTasks} setUpdateTasks={props.setUpdateTasks} selectedTask={props.selectedTask} setSelectedTask={props.setselectedTask}/>
       </div>
       </>
   

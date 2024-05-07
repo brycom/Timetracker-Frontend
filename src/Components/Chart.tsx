@@ -16,6 +16,8 @@ interface Props{
 }
 
 function Chart(props:Props) {
+    const tramsForTsXSkit = props.endDate;
+    console.log(tramsForTsXSkit)
  const data = {
     labels : ['mon','Tue','Wed','Thu','Fri','Sat'],
     datasets: [
