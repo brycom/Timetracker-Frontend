@@ -35,10 +35,10 @@ interface Props {
 }
 
 function App() {
-  const [page, setPage] = useState<string>('homePage');
+  const [page, setPage] = useState<string>('');
   const [tasks, setTasks] = useState<task[]>([]);
   const [startTime, setStartTime] = useState<string>(
-    new Date().toLocaleTimeString('sv-se')
+    new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'})
   );
   const [date, setDate] = useState<string>(
     new Date().toLocaleDateString('sv-se')
@@ -48,20 +48,20 @@ function App() {
     category: '',
     date: date,
     description: '',
-    endTime: new Date().toLocaleTimeString('sv-se'),
+    endTime: new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'}),
     headline: '',
     id: '',
-    startTime: new Date().toLocaleTimeString('sv-se'),
+    startTime: new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'}),
     timeSpent: 0,
   });
   const [newTask, setNewTask] = useState<task>({
     category: '',
     date: date,
     description: '',
-    endTime: new Date().toLocaleTimeString('sv-se'),
+    endTime: new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'}),
     headline: '',
     id: '',
-    startTime: new Date().toLocaleTimeString('sv-se'),
+    startTime: new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'}),
     timeSpent: 0,
   });
 
@@ -107,7 +107,7 @@ function App() {
           about: <About />,
           planing: <Planing {...props} />,
           statistics: (
-            <Statistics setUpdateTasks={setUpdateTasks} updateTasks={updateTasks}  />
+            <Statistics setUpdateTasks={setUpdateTasks} updateTasks={updateTasks} selectedTask={props.selectedTask} setSelectedTask={props.setselectedTask}  />
           ),
           admin: <Admin />,
           login: <Login />,
