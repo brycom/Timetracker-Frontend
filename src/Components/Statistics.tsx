@@ -28,9 +28,10 @@ interface Props{
 }
 function Statistics(props:Props) {
   //const [tasks, setTasks] = useState<task[]>()
-  const[totalTime, setTotalTime] = useState<number>()
-  const[user, setUser] = useState<string>()
-
+  const[totalTime, setTotalTime] = useState<number>(0);
+  const[user, setUser] = useState<string>();
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
   const[timePerCategory, setTimePerCategory] = useState<tpc[]>([]);
 
 useEffect(() => {
@@ -51,11 +52,11 @@ useEffect(() => {
         <div className='ul-container'>
         <input type="text" placeholder='Vecka:' />
           <h3>{user}</h3>
-          <h3>Total tid: {totalTime} min</h3>
+          <h3>Total tid: {totalTime/60}t ({totalTime} min)</h3>
           <ul className='time-per-category'>
             {timePerCategory.map((tpc,index)=>(
               <li key={index}>
-                {tpc.category}: {tpc.timeSpent}min
+                {tpc.category}:{tpc.timeSpent/60}t ({tpc.timeSpent}min)
               </li>
             ))}
           </ul>
@@ -64,7 +65,7 @@ useEffect(() => {
         </div>
         <div className='bottom-section'>
           <h1>Chart!!!</h1>
-          <Chart />
+          <Chart timePerCategory={timePerCategory} startDate={startDate} endDate={endDate}/>
       </div>
     
     </>
