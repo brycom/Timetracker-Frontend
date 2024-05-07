@@ -4,10 +4,30 @@ import {Bar} from 'react-chartjs-2'
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend)
 
-function Chart() {
+interface tpc{
+    category: string,
+    timeSpent: number
+  }
+
+interface Props{
+    timePerCategory: tpc[];
+    startDate: string;
+    endDate: string;
+}
+
+function Chart(props:Props) {
  const data = {
     labels : ['mon','Tue','Wed','Thu','Fri','Sat'],
     datasets: [
+/*         props.timePerCategory.map(
+            (tpc)=>{
+             
+                    label: tpc.category,
+                    data: [tpc.timeSpent], 
+                    backgroundColor: 'rgba(5, 28, 133, 0.541)'
+                
+            }
+        ) */
         {
             label: 'Städa',
             data: [4,1, 3, 5, 8, 10], // Tid för att städa för varje dag

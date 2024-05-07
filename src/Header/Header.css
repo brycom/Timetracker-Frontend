@@ -7,22 +7,24 @@
     left: 0;
     width: 100%;
     padding: 10px;
-    background-color: rgba(202, 199, 199, 1);
+    background-color: rgba(202, 199, 199, 0.555);
     z-index: 1000;
   }
   
   .left-btn {
+    font-size: 24px;
     display: flex;
     background-color: transparent;
     color: rgba(255, 255, 255, 1);
     position: absolute;
-    left: 10px;
+    left: 5%;
   }
   
   .right-btn {
     display: flex;
     position: absolute;
-    right: 20px;
+    right: 5%;
+    font-size: 24px;
   }
   
   .nav-btn {
@@ -31,7 +33,9 @@
   }
   
   h2 {
-    color: rgba(61, 58, 58, 1);
-    margin: 0 auto; /* Centrera elementet horisontellt */
+    font-weight: 800;
+    font-size: 36px;
+    color: rgb(92, 85, 85);
+    margin: 0 auto;
   }
   
