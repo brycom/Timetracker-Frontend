@@ -41,7 +41,7 @@ currentDate.setDate(currentDate.getDate() - 7)
   const[timePerCategory, setTimePerCategory] = useState<tpc[]>([]);
 
 useEffect(() => {
-  fetch("https://oyster-app-oquaf.ondigitalocean.app/user/statistics/"+userl+"/"+startDate+"/"+endDate,{
+  fetch("https://clownfish-app-o82ul.ondigitalocean.app/user/statistics/"+userl+"/"+startDate+"/"+endDate,{
     headers: {
       Authorization: `Bearer ${jwtToken}`,
     },

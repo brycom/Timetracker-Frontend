@@ -1,7 +1,11 @@
 import { useState } from "react";
+import '../Css/Login.css'
+interface Props{
+  setLogin:Function
+  setLogedin:Function
+}
 
-
-function Login() {
+function Login(props:Props) {
   const [username,setUsername] = useState<string>("");
   const [password,setPassword] = useState<string>("");
 
@@ -15,14 +19,16 @@ function Login() {
         password: password
       })
     };
-    fetch('https://oyster-app-oquaf.ondigitalocean.app/user/login', requestOptions)
+    fetch('https://clownfish-app-o82ul.ondigitalocean.app/user/login', requestOptions)
      .then(response => response.json())
      .then((data) => {
        // console.log(data)
         if(data.token){
           localStorage.setItem("token", data.token);
-          localStorage.setItem("user", data.user.id)
-          window.location.reload();
+          localStorage.setItem("user", data.user.id);
+          props.setLogin(false);
+          props.setLogedin(true);
+          
         }else{
           alert("Fel användarnamn eller lösenord")
         }
@@ -31,12 +37,11 @@ function Login() {
      .catch(error => console.log('error', error));
  }
   return (
-    <div>
-      <h1>Logga in</h1>
+    <div className="login-div">
       <form onSubmit={(e)=>(Loginn(),e.preventDefault())} action="">
         <input name="username" value={username} onChange={(e)=>setUsername(e.target.value)} type="text" placeholder="Användarnamn:" />
         <input name="password" value={password} onChange={(e)=> setPassword(e.target.value)} type="password" placeholder="Lösenord:" />
-        <button type="submit"></button>
+        <button type="submit">Logga in!</button>
       </form>
     </div>
   )

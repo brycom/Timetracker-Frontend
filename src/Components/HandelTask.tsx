@@ -31,7 +31,7 @@ function HandelTask(props:Props) {
     function startTask(){
         if(props.selectedTask.category !== undefined){
         const time = new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'});
-        fetch("https://oyster-app-oquaf.ondigitalocean.app/user/starttask/"+user+"/"+props.selectedTask.id+"/"+time,{
+        fetch("https://clownfish-app-o82ul.ondigitalocean.app//user/starttask/"+user+"/"+props.selectedTask.id+"/"+time,{
           method:'PATCH',
           headers:{
             'Authorization': `Bearer ${jwtToken}`
@@ -47,7 +47,7 @@ function HandelTask(props:Props) {
       function EndTask(){
         if(props.selectedTask.category !== undefined){
         const time = new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'});
-        fetch("https://oyster-app-oquaf.ondigitalocean.app/user/stoptask/"+user+"/"+props.selectedTask.id+"/"+time,{
+        fetch("https://clownfish-app-o82ul.ondigitalocean.app/user/stoptask/"+user+"/"+props.selectedTask.id+"/"+time,{
           method:'PATCH',
           headers:{
             'Authorization': `Bearer ${jwtToken}`
