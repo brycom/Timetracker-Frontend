@@ -36,6 +36,8 @@ interface Props {
 
 function App() {
   const [page, setPage] = useState<string>('');
+  const[login,setLogin] = useState<boolean>(false);
+  const[logedin,setLogedin] = useState<boolean>(false);
   const [tasks, setTasks] = useState<task[]>([]);
   const [startTime, setStartTime] = useState<string>(
     new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'})
@@ -81,6 +83,15 @@ function App() {
   };
 
   useEffect(() => {
+    if(localStorage.getItem('token')==undefined){
+      setLogedin(false);
+    }
+    else{
+      setLogedin(true);
+    }
+  }, []);
+
+  useEffect(() => {
     let pageUrl = page;
 
     if (!pageUrl) {
@@ -101,7 +112,8 @@ function App() {
   return (
     <>
       <div>
-        <Navbar setPage={setPage} />
+        <Navbar setLogedin={setLogedin} logedin={logedin} setLogin={setLogin} setPage={setPage} />
+        {login &&<Login setLogedin={setLogedin} setLogin={setLogin}/>}
         {{
           homePage: <Home />,
           about: <About />,
@@ -110,7 +122,6 @@ function App() {
             <Statistics setUpdateTasks={setUpdateTasks} updateTasks={updateTasks} selectedTask={props.selectedTask} setSelectedTask={props.setselectedTask}  />
           ),
           admin: <Admin />,
-          login: <Login />,
         }[page]}
       </div>
     </>

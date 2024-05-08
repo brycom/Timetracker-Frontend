@@ -18,9 +18,6 @@ function Home() {
           Ta kontroll över din tid med oss!
         </p>
       </div>
-      <div className="center">
-        <img src="src\img\timeglass.jpg" alt="ingen bild hittades" />
-      </div>
       <div className="right">
         <h2 id='kontakts'>Kontakta oss:</h2>
         <p>

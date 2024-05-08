@@ -27,7 +27,7 @@ interface Props{
     const [tasks, setTasks] = useState<task[]>([]);
 
     useEffect(() => {
-        fetch("https://oyster-app-oquaf.ondigitalocean.app/user/task/"+ user, {
+        fetch("https://clownfish-app-o82ul.ondigitalocean.app/user/task/"+ user, {
           headers:{
           'Authorization': `Bearer ${jwtToken}`
         }})

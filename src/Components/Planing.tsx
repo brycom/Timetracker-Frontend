@@ -52,7 +52,6 @@ function Planing(props:Props) {
         }));
     }, 60000);
 
-    // Stoppa intervallet när komponenten avmonteras eller när komponenten uppdateras
     return () => clearInterval(intervalId);
 }, []);
 
@@ -63,7 +62,7 @@ function Planing(props:Props) {
 
 
   function getDefaultTasks(){
-    fetch("https://oyster-app-oquaf.ondigitalocean.app/user/defaulttasks",
+    fetch("https://clownfish-app-o82ul.ondigitalocean.app/user/defaulttasks",
       {headers:{
         'Authorization': `Bearer ${jwtToken}`
       }}
@@ -90,7 +89,7 @@ function Planing(props:Props) {
 
   
     
-    fetch("https://oyster-app-oquaf.ondigitalocean.app/user/task", {
+    fetch("https://clownfish-app-o82ul.ondigitalocean.app/user/task", {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${jwtToken}`,
@@ -133,7 +132,7 @@ function Planing(props:Props) {
       alert('Du måste fylla i alla fält');
       return;
     }
-    fetch("https://oyster-app-oquaf.ondigitalocean.app/user/task/"+user, {
+    fetch("https://clownfish-app-o82ul.ondigitalocean.app/user/task/"+user, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${jwtToken}`,
