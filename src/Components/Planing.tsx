@@ -13,6 +13,7 @@ headline: string
 id:string 
 startTime: string
 timeSpent:number
+active: boolean
 
 }
 
@@ -115,7 +116,8 @@ function Planing(props:Props) {
       headline: '',
       id: '',
       startTime: '',
-      timeSpent: 0
+      timeSpent: 0,
+      active:false
     })
    })
   }
@@ -143,8 +145,9 @@ function Planing(props:Props) {
         headline: props.newTask.headline,
         description: props.newTask.description,
         date: props.newTask.date,
-        endTime: props.newTask.endTime,
+        endTime: props.newTask.startTime,
         startTime: props.newTask.startTime,
+        active:true,
         timeSpent: 0
       })
     })
@@ -207,7 +210,7 @@ function Planing(props:Props) {
       </div>
       <div id='bottom-section'>
         {props.selectedTask.category &&<HandelTask tasks={props.tasks} setTasks={props.setTasks} selectedTask={props.selectedTask} setselectedTask={props.setselectedTask} setUpdateTasks={props.setUpdateTasks}/>}
-      <Tasks  updateTasks={props.updateTasks} setUpdateTasks={props.setUpdateTasks} selectedTask={props.selectedTask} setSelectedTask={props.setselectedTask}/>
+      <Tasks startdate={props.date} enddate={props.date}  updateTasks={props.updateTasks} setUpdateTasks={props.setUpdateTasks} selectedTask={props.selectedTask} setSelectedTask={props.setselectedTask}/>
       </div>
       </>
   

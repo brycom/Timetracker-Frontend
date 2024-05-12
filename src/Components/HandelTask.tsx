@@ -10,6 +10,7 @@ interface task{
   id:string 
   startTime: string
   timeSpent:number
+  active: boolean
   
   }
 
@@ -31,7 +32,7 @@ function HandelTask(props:Props) {
     function startTask(){
         if(props.selectedTask.category !== undefined){
         const time = new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'});
-        fetch("https://clownfish-app-o82ul.ondigitalocean.app//user/starttask/"+user+"/"+props.selectedTask.id+"/"+time,{
+        fetch("https://clownfish-app-o82ul.ondigitalocean.app/user/starttask/"+user+"/"+props.selectedTask.id+"/"+time,{
           method:'PATCH',
           headers:{
             'Authorization': `Bearer ${jwtToken}`

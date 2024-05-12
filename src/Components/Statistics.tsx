@@ -14,6 +14,7 @@ headline: string
 id:string 
 startTime: string
 timeSpent:number
+active: boolean
 
 }
 interface tpc{
@@ -32,8 +33,7 @@ function Statistics(props:Props) {
   const jwtToken = localStorage.getItem('token');
   const userl = localStorage.getItem('user');
   const currentDate = new Date();
-currentDate.setDate(currentDate.getDate() - 7)
-  //const [tasks, setTasks] = useState<task[]>()
+currentDate.setDate(currentDate.getDate() - 7);
   const[totalTime, setTotalTime] = useState<number>(0);
   const[user, setUser] = useState<string>();
   const [startDate, setStartDate] = useState<string>(currentDate.toLocaleDateString('sv-se'));
@@ -48,12 +48,11 @@ useEffect(() => {
   })
   .then((res) => res.json())
   .then((data) => {
-    console.log(data)
-     setTotalTime(data.totaltime)
-     setUser(data.user)
-     setTimePerCategory(data.timePerCategory)
+     setTotalTime(data.totaltime);
+     setUser(data.user);
+     setTimePerCategory(data.timePerCategory);
 
-   })
+   });
 }, [startDate, endDate]);
   return (
     <>
@@ -78,10 +77,10 @@ useEffect(() => {
             ))}
           </ul>
         </div>
-          <Tasks setUpdateTasks={props.setUpdateTasks} updateTasks={props.updateTasks} selectedTask={props.selectedTask} setSelectedTask={props.setSelectedTask}/>
+          <Tasks startdate={startDate} enddate={endDate} setUpdateTasks={props.setUpdateTasks} updateTasks={props.updateTasks} selectedTask={props.selectedTask} setSelectedTask={props.setSelectedTask}/>
         </div>
         <div className='bottom-section'>
-          <h1>Chart!!!</h1>
+          
           <Chart timePerCategory={timePerCategory} startDate={startDate} endDate={endDate}/>
       </div>
     

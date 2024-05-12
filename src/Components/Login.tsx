@@ -10,7 +10,6 @@ function Login(props:Props) {
   const [password,setPassword] = useState<string>("");
 
   function Loginn() {
-    //console.log(password)
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -22,7 +21,6 @@ function Login(props:Props) {
     fetch('https://clownfish-app-o82ul.ondigitalocean.app/user/login', requestOptions)
      .then(response => response.json())
      .then((data) => {
-       // console.log(data)
         if(data.token){
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", data.user.id);
@@ -41,7 +39,7 @@ function Login(props:Props) {
       <form onSubmit={(e)=>(Loginn(),e.preventDefault())} action="">
         <input name="username" value={username} onChange={(e)=>setUsername(e.target.value)} type="text" placeholder="Användarnamn:" />
         <input name="password" value={password} onChange={(e)=> setPassword(e.target.value)} type="password" placeholder="Lösenord:" />
-        <button type="submit">Logga in!</button>
+        <button type="submit">Logga in</button>
       </form>
     </div>
   )

@@ -15,14 +15,14 @@ body{
   }
   
   #default-div {
-    /* background-color: rgba(202, 199, 199, 0.363); */
+
     padding: 20px;
     margin-left: 50px;
     width: 350px;
     border-radius: 10px;
   }
   #default-div ul{
-    max-height: 400px; /* Maximal höjd för ul */
+    max-height: 400px;
     overflow-y: auto;
     
     margin: 0;
@@ -119,17 +119,12 @@ body{
     box-shadow:rgba(202, 199, 199, 0.692) 5px 5px 5px;
   }
   
-/*   .react-calendar__navigation {
-   
-  }
- */
   .react-calendar__month-view__days{
     height: 400px;
     width: 100%;
     
   }
   .react-calendar__tile{
-    /* background-color: rgba(0, 0, 0, 0.397); */
     border-radius: 10px;
 
     

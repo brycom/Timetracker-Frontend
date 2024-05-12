@@ -12,12 +12,15 @@ interface task{
   id:string 
   startTime: string
   timeSpent:number
+  active: boolean
 }
 interface Props{
     setUpdateTasks:Function
     updateTasks:boolean
     selectedTask:task
     setSelectedTask:Function
+    startdate :string
+    enddate :string
 }
 
  function Tasks(props: Props) {
@@ -27,17 +30,17 @@ interface Props{
     const [tasks, setTasks] = useState<task[]>([]);
 
     useEffect(() => {
-        fetch("https://clownfish-app-o82ul.ondigitalocean.app/user/task/"+ user, {
+        fetch("https://clownfish-app-o82ul.ondigitalocean.app/user/task/"+ user + "/"+props.startdate+"/"+props.enddate, {
           headers:{
           'Authorization': `Bearer ${jwtToken}`
         }})
         .then((res)=>res.json())
         .then((data)=>{
             setTasks(data);
-        props.setUpdateTasks(false);
-        console.log(data);}
+        props.setUpdateTasks(false);}
     )
-    }, [props.updateTasks]); 
+    }, [props.updateTasks,props.startdate,props.enddate]); 
+
 
   return (
     <div>
@@ -48,10 +51,16 @@ interface Props{
         <h3>{task.category}</h3>
         <h3>{task.headline}</h3>
       </div>
-      <p id='description'>{task.description}</p>
+      <p id='description'>{task.description}
+      <br />
+      {task.date}</p>
       <div id='time'>
         <h5>Start-tid: {task.startTime}</h5>
-        <h5>Slut-tid: {task.endTime}</h5>
+        {task.active ? (
+          <h5>Slut-tid: pågående</h5>
+        ) : (
+          <h5>Slut-tid: {task.endTime}</h5>
+        )}
       </div>
     </li>
   ))}
