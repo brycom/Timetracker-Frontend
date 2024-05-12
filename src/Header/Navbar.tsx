@@ -15,7 +15,7 @@ function Navbar(props:Props) {
     localStorage.removeItem('user')
     props.setLogedin(false)
     props.setPage("homePage")
-    //window.location.reload();
+
   }
   return (
     <div className='navbar'>
