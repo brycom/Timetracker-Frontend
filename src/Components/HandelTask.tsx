@@ -10,6 +10,7 @@ interface task{
   id:string 
   startTime: string
   timeSpent:number
+  active: boolean
   
   }
 

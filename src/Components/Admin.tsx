@@ -11,6 +11,7 @@ headline: string
 id:string 
 startTime: string
 timeSpent:number
+active: boolean
 
 }
 interface User{

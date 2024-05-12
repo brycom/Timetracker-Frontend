@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Navbar from './Header/Navbar';
 import Home from './Components/Home';
-import About from './Components/About';
 import Planing from './Components/Planing';
 import Statistics from './Components/Statistics';
 import Login from './Components/Login';
@@ -17,6 +16,7 @@ interface task {
   id: string;
   startTime: string;
   timeSpent: number;
+  active: boolean;
 }
 
 interface Props {
@@ -55,6 +55,7 @@ function App() {
     id: '',
     startTime: new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'}),
     timeSpent: 0,
+    active: false,
   });
   const [newTask, setNewTask] = useState<task>({
     category: '',
@@ -65,6 +66,7 @@ function App() {
     id: '',
     startTime: new Date().toLocaleTimeString('sv-se',{hour: '2-digit', minute: '2-digit'}),
     timeSpent: 0,
+    active: false,
   });
 
   const props: Props = {
@@ -116,7 +118,6 @@ function App() {
         {login &&<Login setLogedin={setLogedin} setLogin={setLogin}/>}
         {{
           homePage: <Home />,
-          about: <About />,
           planing: <Planing {...props} />,
           statistics: (
             <Statistics setUpdateTasks={setUpdateTasks} updateTasks={updateTasks} selectedTask={props.selectedTask} setSelectedTask={props.setselectedTask}  />
