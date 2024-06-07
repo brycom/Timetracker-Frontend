@@ -6,6 +6,7 @@ import Planing from './Components/Planing';
 import Statistics from './Components/Statistics';
 import Login from './Components/Login';
 import Admin from './Components/Admin';
+import Register from './Components/Register';
 
 interface task {
   category: string;
@@ -115,7 +116,7 @@ function App() {
     <>
       <div>
         <Navbar setLogedin={setLogedin} logedin={logedin} setLogin={setLogin} setPage={setPage} />
-        {login &&<Login setLogedin={setLogedin} setLogin={setLogin}/>}
+        {login &&<Login setLogedin={setLogedin} setLogin={setLogin} setPage={setPage}/>}
         {{
           homePage: <Home />,
           planing: <Planing {...props} />,
@@ -123,6 +124,7 @@ function App() {
             <Statistics setUpdateTasks={setUpdateTasks} updateTasks={updateTasks} selectedTask={props.selectedTask} setSelectedTask={props.setselectedTask}  />
           ),
           admin: <Admin />,
+          register: <Register setPage={setPage}/>
         }[page]}
       </div>
     </>

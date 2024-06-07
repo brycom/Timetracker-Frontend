@@ -3,6 +3,7 @@ import '../Css/Login.css'
 interface Props{
   setLogin:Function
   setLogedin:Function
+  setPage:Function
 }
 
 function Login(props:Props) {
@@ -39,8 +40,9 @@ function Login(props:Props) {
       <form onSubmit={(e)=>(Loginn(),e.preventDefault())} action="">
         <input name="username" value={username} onChange={(e)=>setUsername(e.target.value)} type="text" placeholder="Användarnamn:" />
         <input name="password" value={password} onChange={(e)=> setPassword(e.target.value)} type="password" placeholder="Lösenord:" />
-        <button type="submit">Logga in</button>
+        <button id="login-btn" type="submit">Logga in</button>
       </form>
+      <button id="sign-up" onClick={()=>props.setPage("register")}>Sign up!</button>
     </div>
   )
 }
