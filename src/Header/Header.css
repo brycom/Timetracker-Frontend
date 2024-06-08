@@ -33,6 +33,7 @@
   }
   
   h2 {
+    align-self: center;
     font-weight: 800;
     font-size: 36px;
     color: rgb(92, 85, 85);

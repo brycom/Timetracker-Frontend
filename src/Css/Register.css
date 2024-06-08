@@ -1,0 +1,34 @@
+.register-form{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30%;
+
+}
+
+.register-form input{
+    background-color: rgb(153, 149, 149);
+    color: black;
+    width: 400px;
+    margin: 20px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+}
+
+.register-form button{
+    align-items: center;
+    margin-top: 10px;
+    width: 150px;
+    font-weight: bold;
+}
+
+#not-ok{
+    color: red;
+    font-size: large;
+    font-weight:500 ;
+}
+#headline{
+    margin-top: 150px;
+    margin-bottom: 0px;
+}

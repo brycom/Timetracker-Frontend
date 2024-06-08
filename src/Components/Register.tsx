@@ -48,19 +48,20 @@ function Register(props:Props) {
 
   return (
     <div>
-        <form onSubmit={(e)=>{
+      <h1 id='headline'>Registrera dig</h1>
+        <form className='register-form' onSubmit={(e)=>{
             Reg()
             e.preventDefault()
 
         }}>
-            <input required type="text" name="username" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)} />
-            <input required type="text" name='firsname' placeholder='Firstname' value={firstName} onChange={(e)=>setFirstName(e.target.value)}  />
-            <input required type="text" name='lastname' placeholder='Lastname' value={lastName} onChange={(e)=>setLastName(e.target.value)} />
-            <input required type="text" name='email' placeholder='Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} />
-            <input required type="password" name="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
-            <input type="submit" value="Register" />
+            <input className='register-form' required type="text" name="username" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)} />
+            <input className='register-form' required type="text" name='firsname' placeholder='Firstname' value={firstName} onChange={(e)=>setFirstName(e.target.value)}  />
+            <input className='register-form' required type="text" name='lastname' placeholder='Lastname' value={lastName} onChange={(e)=>setLastName(e.target.value)} />
+            <input className='register-form' required type="text" name='email' placeholder='Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} />
+            <input className='register-form' required type="password" name="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+            <button className='register-form' type='submit'>Registrera</button>
             
-            {tryAgain &&  <p>Användaren finns redan!</p>}
+            {tryAgain &&  <p id='not-ok'>Användaren finns redan!</p>}
         </form>
       
     </div>

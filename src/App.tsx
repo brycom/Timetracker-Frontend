@@ -115,7 +115,7 @@ function App() {
   return (
     <>
       <div>
-        <Navbar setLogedin={setLogedin} logedin={logedin} setLogin={setLogin} setPage={setPage} />
+        <Navbar setLogedin={setLogedin} logedin={logedin} setLogin={setLogin} setPage={setPage} login={login} />
         {login &&<Login setLogedin={setLogedin} setLogin={setLogin} setPage={setPage}/>}
         {{
           homePage: <Home />,

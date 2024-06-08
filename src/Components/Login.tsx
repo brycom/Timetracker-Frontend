@@ -7,6 +7,7 @@ interface Props{
 }
 
 function Login(props:Props) {
+  const[failedLogin, setFaildLogin] = useState(false);
   const [username,setUsername] = useState<string>("");
   const [password,setPassword] = useState<string>("");
 
@@ -30,19 +31,24 @@ function Login(props:Props) {
           
         }else{
           alert("Fel användarnamn eller lösenord")
-        }
-      
-     })
-     .catch(error => console.log('error', error));
+          }
+          
+          })
+          .catch(error => {
+            setFaildLogin(true);
+            console.log('error', error)});
  }
   return (
     <div className="login-div">
       <form onSubmit={(e)=>(Loginn(),e.preventDefault())} action="">
         <input name="username" value={username} onChange={(e)=>setUsername(e.target.value)} type="text" placeholder="Användarnamn:" />
         <input name="password" value={password} onChange={(e)=> setPassword(e.target.value)} type="password" placeholder="Lösenord:" />
+      {failedLogin &&<p id="faild-login">Fel användarnamn eller lösenord</p>}
         <button id="login-btn" type="submit">Logga in</button>
       </form>
-      <button id="sign-up" onClick={()=>props.setPage("register")}>Sign up!</button>
+      <button id="sign-up" onClick={()=>{
+        props.setPage("register")
+        props.setLogin(false)}}>Sign up!</button>
     </div>
   )
 }
